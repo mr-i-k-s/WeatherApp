@@ -13,7 +13,6 @@
     <Folder Include="MVVM\ViewModels\" />
     <Folder Include="MVVM\Views\" />
     <Folder Include="Assets\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
