@@ -43,5 +43,10 @@ namespace WeatherApp.Services
 		{
 			return !GetAll().FirstOrDefault(x => x.Key == key.ToUpper()).Equals(default(KeyValuePair<string, string>));
 		}
+
+		private KeyValuePair<string, string>? GetObject(string key)
+		{
+			return GetAll().FirstOrDefault(x => x.Key == key.ToUpper());
+		}
 	}
 }
