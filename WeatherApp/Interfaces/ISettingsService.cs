@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeatherApp.Interfaces
 {
-	public class ISettingsService
+	public interface ISettingsService
 	{
 	}
 }
