@@ -15,7 +15,7 @@ namespace WeatherApp.Services
 
 		public string Get(string key)
 		{
-			throw new NotImplementedException();
+			return GetAll().FirstOrDefault(x => x.Key == key.ToUpper()).Value ?? "";
 		}
 
 		public bool Set(string key, string value)
