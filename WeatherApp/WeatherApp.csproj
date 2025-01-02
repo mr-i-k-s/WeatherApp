@@ -12,7 +12,6 @@
     <Folder Include="MVVM\Models\" />
     <Folder Include="MVVM\ViewModels\" />
     <Folder Include="MVVM\Views\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Assets\" />
     <Folder Include="Services\" />
   </ItemGroup>
