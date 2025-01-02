@@ -38,5 +38,10 @@ namespace WeatherApp.Services
 
 			return response ?? new List<KeyValuePair<string, string>>();
 		}
+
+		private bool Exists(string key)
+		{
+			return !GetAll().FirstOrDefault(x => x.Key == key.ToUpper()).Equals(default(KeyValuePair<string, string>));
+		}
 	}
 }
