@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WeatherApp.Interfaces;
 
 namespace WeatherApp.Services
@@ -17,6 +18,14 @@ namespace WeatherApp.Services
 		public void ShowWindow(object viewModel)
 		{
 			throw new NotImplementedException();
+		}
+
+		private Window CreateWindow(object viewModel, bool isDialog)
+		{
+			var window = FindWindowInAssebly(viewModel);
+			var view = SetUpWindow(window, isDialog);
+
+			return view;
 		}
 	}
 }
