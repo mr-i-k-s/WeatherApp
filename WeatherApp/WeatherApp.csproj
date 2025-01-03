@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="MVVM\ViewModels\" />
     <Folder Include="MVVM\Views\" />
     <Folder Include="Assets\" />
   </ItemGroup>
