@@ -53,9 +53,11 @@
             <Button
                 DockPanel.Dock="Right"
                 VerticalAlignment="Top"
-                Command="{Binding }"
                 Background="Transparent"
-                BorderBrush="Transparent">
+                BorderBrush="Transparent"
+                Command="{Binding OpenSettingsCommand}"
+                CommandParameter="{Binding ElementName=MainWindow}"
+                ToolTip="Settings">
 
                 <Image
                     MaxHeight="20"
