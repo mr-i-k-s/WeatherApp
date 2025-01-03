@@ -2,6 +2,7 @@
 using System.Windows;
 using WeatherApp.Interfaces;
 using WeatherApp.MVVM.ViewModels;
+using WeatherApp.MVVM.Views;
 using WeatherApp.Services;
 
 namespace WeatherApp
@@ -42,6 +43,7 @@ namespace WeatherApp
 			services.AddTransient<SettingsViewModel>();
 
 			// Register Views
+			services.AddSingleton<MainWindowView>();
 
 		}
 	}
