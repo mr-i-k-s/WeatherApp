@@ -24,7 +24,9 @@ namespace WeatherApp
 
 		protected override void OnStartup(StartupEventArgs e)
 		{
-
+			var windowService = ServiceProvider.GetRequiredService<IWindowService>();
+			var mainWindowViewModel = ServiceProvider.GetRequiredService<MainWindowViewModel>();
+			windowService.ShowWindow(mainWindowViewModel);
 		}
 
 		private void ConfigureServices(IServiceCollection services)
