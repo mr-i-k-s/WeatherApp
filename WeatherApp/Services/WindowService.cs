@@ -18,7 +18,8 @@ namespace WeatherApp.Services
 
 		public void ShowWindow(object viewModel)
 		{
-			throw new NotImplementedException();
+			var view = CreateWindow(viewModel, false);
+			view.Show();
 		}
 
 		private Window CreateWindow(object viewModel, bool isDialog)
