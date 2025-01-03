@@ -30,7 +30,26 @@ namespace WeatherApp.Services
 
 		public bool Set(string key, string value)
 		{
-			throw new NotImplementedException();
+			key = key.ToUpper();
+			var Item = GetObject(key);
+			var _data = GetAll().ToList();
+
+			if (Item.Equals(default(KeyValuePair<string, string>)))
+			{
+				//Add new key in Data Items
+				_data.Add(new KeyValuePair<string, string>(key, value));
+			}
+			else
+			{
+				_data.Remove(_data.First(x => x.Key == key)); //Remove old entry
+				_data.Add(new KeyValuePair<string, string>(key, value)); //add updated entry
+			}
+
+			string json = JsonConvert.SerializeObject(_data.ToArray(), Formatting.Indented);
+			//write string to destination
+			File.WriteAllText(FileName, json);
+
+			return true;
 		}
 
 		private List<KeyValuePair<string, string>> GetAll()
