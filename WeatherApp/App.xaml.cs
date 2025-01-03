@@ -33,6 +33,8 @@ namespace WeatherApp
 			// Register Services
 			services.AddSingleton<IWindowService, WindowService>();
 			services.AddSingleton<ISettingsService, SettingsService>();
+			services.AddSingleton<IWeatherService, WeatherService>();
+			services.AddSingleton<IGeoService, GeoService>();
 
 			// Register ViewModels
 
