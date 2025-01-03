@@ -68,5 +68,19 @@ namespace WeatherApp.Services
 
 			return window;
 		}
+
+		private Window? FindOwnerWindow(Window window)
+		{
+			if (Application.Current == null)
+			{
+				return null;
+			}
+
+			var active = Application.Current.Windows.OfType<Window>()
+				.Where(x => x.IsActive)
+				.FirstOrDefault();
+			active = active ?? Application.Current.MainWindow;
+			return active == window ? null : active;
+		}
 	}
 }
