@@ -1,4 +1,4 @@
-﻿using WeatherApp.MVVM.Models
+﻿using WeatherApp.MVVM.Models;
 
 namespace WeatherApp.Interfaces
 {

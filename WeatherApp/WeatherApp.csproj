@@ -9,7 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\Icons\" />
+    <None Remove="Assets\Icons\brokenClouds.png" />
+    <None Remove="Assets\Icons\clearSkyDay.png" />
+    <None Remove="Assets\Icons\clearSkyNight.png" />
+    <None Remove="Assets\Icons\closeWindow.png" />
+    <None Remove="Assets\Icons\fewCloudsDay.png" />
+    <None Remove="Assets\Icons\fewCloudsNight.png" />
+    <None Remove="Assets\Icons\mist.png" />
+    <None Remove="Assets\Icons\rainDay.png" />
+    <None Remove="Assets\Icons\rainNight.png" />
+    <None Remove="Assets\Icons\scatteredClouds.png" />
+    <None Remove="Assets\Icons\showerRain.png" />
+    <None Remove="Assets\Icons\snow.png" />
+    <None Remove="Assets\Icons\thunderstorm.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +29,48 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Icons\brokenClouds.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\clearSkyDay.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\clearSkyNight.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\closeWindow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\fewCloudsDay.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\fewCloudsNight.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\mist.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\rainDay.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\rainNight.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\scatteredClouds.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\showerRain.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\snow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\thunderstorm.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
