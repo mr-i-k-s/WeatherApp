@@ -10,7 +10,17 @@ namespace WeatherApp.Services
 
 		public bool Delete(string key)
 		{
-			throw new NotImplementedException();
+			if (Exists(key))
+			{
+				var _data = GetAll().Where(x => x.Key != key.ToUpper()).ToArray();
+				string json = JsonConvert.SerializeObject(_data, Formatting.Indented);
+
+				//write string to destination
+				File.WriteAllText(FileName, json);
+
+				return true;
+			}
+			return false;
 		}
 
 		public string Get(string key)
