@@ -56,7 +56,17 @@ namespace WeatherApp.Services
 
 			}
 			else { throw new Exception("View of Viewmodel in Assebly not found"); }
+		}
 
+		private Window SetUpWindow(Window window, bool isDialog)
+		{
+			var owner = FindOwnerWindow(window);
+			if (owner != null)
+			{
+				window.Owner = owner;
+			}
+
+			return window;
 		}
 	}
 }
