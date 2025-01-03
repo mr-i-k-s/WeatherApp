@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http;
-using System.Net.NetworkInformation;
 using WeatherApp.Interfaces;
 using WeatherApp.MVVM.Models;
 

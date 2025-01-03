@@ -3,11 +3,9 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
-using System.Windows.Controls;
 using System.Windows.Threading;
 using WeatherApp.Interfaces;
 using WeatherApp.MVVM.Models;
-using WeatherApp.Services;
 
 namespace WeatherApp.MVVM.ViewModels
 {
