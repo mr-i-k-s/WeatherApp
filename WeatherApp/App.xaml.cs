@@ -46,6 +46,7 @@ namespace WeatherApp
 
 			// Register Views
 			services.AddSingleton<MainWindowView>();
+			services.AddSingleton<SettingsView>();
 
 		}
 	}
