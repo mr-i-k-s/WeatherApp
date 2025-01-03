@@ -13,7 +13,8 @@ namespace WeatherApp.Services
 	{
 		public bool? ShowDialog(object viewModel)
 		{
-			throw new NotImplementedException();
+			var view = CreateWindow(viewModel, true);
+			return view.ShowDialog();
 		}
 
 		public void ShowWindow(object viewModel)
