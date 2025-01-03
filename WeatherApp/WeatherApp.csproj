@@ -15,19 +15,28 @@
     <None Remove="Assets\Icons\closeWindow.png" />
     <None Remove="Assets\Icons\fewCloudsDay.png" />
     <None Remove="Assets\Icons\fewCloudsNight.png" />
+    <None Remove="Assets\Icons\HumiditySymbol.png" />
+    <None Remove="Assets\Icons\Kompas.png" />
     <None Remove="Assets\Icons\mist.png" />
+    <None Remove="Assets\Icons\OpenWeather.png" />
+    <None Remove="Assets\Icons\question.png" />
     <None Remove="Assets\Icons\rainDay.png" />
     <None Remove="Assets\Icons\rainNight.png" />
     <None Remove="Assets\Icons\scatteredClouds.png" />
+    <None Remove="Assets\Icons\settingsGear.png" />
     <None Remove="Assets\Icons\showerRain.png" />
     <None Remove="Assets\Icons\snow.png" />
+    <None Remove="Assets\Icons\Sunrise.png" />
+    <None Remove="Assets\Icons\Sunset.png" />
     <None Remove="Assets\Icons\thunderstorm.png" />
+    <None Remove="Assets\Icons\WindSymbol.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
@@ -50,7 +59,19 @@
     <Resource Include="Assets\Icons\fewCloudsNight.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Icons\HumiditySymbol.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\Kompas.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Icons\mist.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\OpenWeather.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\question.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Icons\rainDay.png">
@@ -62,13 +83,25 @@
     <Resource Include="Assets\Icons\scatteredClouds.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Icons\settingsGear.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Icons\showerRain.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Icons\snow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Icons\Sunrise.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\Sunset.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Icons\thunderstorm.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\WindSymbol.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

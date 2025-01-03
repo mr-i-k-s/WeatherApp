@@ -20,11 +20,13 @@ namespace WeatherApp.MVVM.ViewModels
 		[ObservableProperty]
 		private IGeoData[]? _geoDataList;
 		[ObservableProperty]
-		private bool _isVisibleGeoDataList;
+		private bool _isVisible_GeoDataList;
 		[ObservableProperty]
 		private IGeoData? _selectedLocation;
 		[ObservableProperty]
-		private string _searchText;
+		private string _textSearch;
+		[ObservableProperty]
+		private string _weatherType;
 		[ObservableProperty]
 		private string _sunriseTime;
 		[ObservableProperty]
@@ -37,14 +39,18 @@ namespace WeatherApp.MVVM.ViewModels
 		private string _tempUnit;
         [ObservableProperty]
         private Uri backgroundImageUri;
-        [ObservableProperty]
+		[ObservableProperty]
+		private Uri weatherIconUri;
+		[ObservableProperty]
         private bool isVisible_WeatherData;
+		[ObservableProperty]
+		private bool isVisible_ConnectionError;
 
-        #endregion Variables
+		#endregion Variables
 
-        #region Properties
+		#region Properties
 
-        public IWeatherService WeatherService { get; set; }
+		public IWeatherService WeatherService { get; set; }
         public IGeoService GeoService { get; set; }
         public IWindowService WindowService  { get; set; }
         public ISettingsService Settings { get; set; }
@@ -53,12 +59,13 @@ namespace WeatherApp.MVVM.ViewModels
 		public DispatcherTimer ConnectionStatusTimer { get; set; }
         public string ApiKey { get; set; }
         public string WeatherUnitType { get; set; }
+        public IPStatus LastIpStatus { get; set; }
 
         #endregion Properties
 
         #region Constructors
 
-        public MainWindowViewModel(IWeatherService weatherService, IGeoService geoService, IWindowService windowService, ISettingsService settings)
+        public MainWindowViewModel(IWeatherService weatherService, IGeoService geoService, IWindowService windowService, ISettingsService settings) : base()
         {
 			WeatherService = weatherService;
             GeoService = geoService;
@@ -103,6 +110,8 @@ namespace WeatherApp.MVVM.ViewModels
 					SunriseTime = new DateTimeOffset().AddSeconds(WeatherData.Sys.Sunrise + WeatherData.Timezone).ToString("HH:mm");
 					SunsetTime = new DateTimeOffset().AddSeconds(WeatherData.Sys.Sunset + WeatherData.Timezone).ToString("HH:mm");
 					WindDirection = GetWindDirection(WeatherData.Wind.Deg);
+					WeatherType = WeatherData.Weather[0].Main;
+					WeatherIconUri = GetWeatherIconUri(WeatherData.Weather[0].Main);
 					ChangeBackground(WeatherData.Weather[0].Main);
                     IsVisible_WeatherData = true;
                 }
@@ -137,6 +146,65 @@ namespace WeatherApp.MVVM.ViewModels
 				direction = "North-West";
 
 			return direction;
+		}
+
+		private Uri GetWeatherIconUri(string weatherKey)
+		{
+			string uri = "pack://application:,,,/Assets/Icons/";
+
+			switch (weatherKey)
+			{
+				case "Clear":
+					uri += "clearSkyDay.png";
+					break;
+				case "Thunderstorm":
+					uri += "thunderstorm.png";
+					break;
+				case "Drizzle":
+					uri += "rainDay.png";
+					break;
+				case "Rain":
+					uri += "rainDay.png";
+					break;
+				case "Snow":
+					uri += "snow.png";
+					break;
+				case "Mist":
+					uri += "mist.png";
+					break;
+				case "Smoke":
+					uri += "mist.png";
+					break;
+				case "Haze":
+					uri += "mist.png";
+					break;
+				case "Dust":
+					uri += "mist.png";
+					break;
+				case "Fog":
+					uri += "mist.png";
+					break;
+				case "Sand":
+					uri += "mist.png";
+					break;
+				case "Ash":
+					uri += "mist.png";
+					break;
+				case "Squall":
+					uri += "mist.png";
+					break;
+				case "Tornado":
+					uri += "mist.png";
+					break;
+				case "Clouds":
+					uri += "scatteredClouds.png";
+					break;
+				default:
+					uri += "question.png";
+					break;
+			}
+
+			return new Uri(uri);
 		}
 
 		private void SyncSettings()
@@ -206,12 +274,12 @@ namespace WeatherApp.MVVM.ViewModels
 
 		#region Observable Property Methodes
 
-		async partial void OnSearchTextChanged(string value)
+		async partial void OnTextSearchChanged(string value)
 		{
 			if (value == String.Empty)
 			{
 				SearchDelayTimer.Stop();
-				IsVisibleGeoDataList = false;
+				IsVisible_GeoDataList = false;
 			}
 			else
 			{
@@ -246,7 +314,7 @@ namespace WeatherApp.MVVM.ViewModels
 			{
 				SelectedLocation = selected;
 				await UpdateWeatherDataAsync();
-				SearchText = String.Empty;
+				TextSearch = String.Empty;
 
 				Settings.Set("city", SelectedLocation.Name);
 				Settings.Set("state", SelectedLocation.State);
@@ -280,12 +348,12 @@ namespace WeatherApp.MVVM.ViewModels
 			SearchDelayTimer.Stop();
 			try
 			{
-                GeoDataList = await GeoService.GetGeoDataAsync(SearchText, ApiKey);
-                IsVisibleGeoDataList = true;
+                GeoDataList = await GeoService.GetGeoDataAsync(TextSearch, ApiKey);
+                IsVisible_GeoDataList = true;
             }
 			catch 
 			{
-                IsVisibleGeoDataList = false;
+                IsVisible_GeoDataList = false;
             }
 		}
 
@@ -296,25 +364,31 @@ namespace WeatherApp.MVVM.ViewModels
 
 		async private void ConnectionStatusTimer_Tick(object? sender, EventArgs e)
 		{
-			//var weatherConnectionState = MyWeatherService.CheckConnection();
-			//var geoConnectionState = MyGeoService.CheckConnection();
-
-			//if (weatherConnectionState == IPStatus.Success && geoConnectionState == IPStatus.Success)
-			//{
-			//	ConnectionImageUri = new Uri("pack://application:,,,/Assets/Images/Background/satelliteGreen.png");
-			//	if (LastConnectionStatus != IPStatus.Success)
-			//	{
-			//		LastConnectionStatus = IPStatus.Success;
-			//		await UpdateWeatherDataAsync();
-			//	}
-			//}
-			//else
-			//{
-			//	LastConnectionStatus = IPStatus.Unknown;
-			//	IsVisible_WeatherData = false;
-			//	BackgroundImageUri = new Uri("pack://application:,,,/Assets/Images/Background/DataError.jpg");
-			//	ConnectionImageUri = new Uri("pack://application:,,,/Assets/Images/Background/satelliteRed.png");
-			//}
+			try
+			{
+				using (Ping pinger = new Ping())
+				{
+					PingReply reply = pinger.Send(@"openweathermap.org");
+					if (reply.Status == IPStatus.Success && LastIpStatus != IPStatus.Success)
+					{
+						LastIpStatus = IPStatus.Success;
+						IsVisible_ConnectionError = false;
+						await UpdateWeatherDataAsync();
+					}
+					else if(reply.Status != IPStatus.Success)
+					{ 
+						LastIpStatus = reply.Status;
+						IsVisible_WeatherData = false;
+						IsVisible_ConnectionError = true;
+					}
+				}
+			}
+			catch (PingException)
+			{
+				LastIpStatus = IPStatus.Unknown;
+				IsVisible_WeatherData = false;
+				IsVisible_ConnectionError = true;
+			}
 		}
 
 		#endregion Events

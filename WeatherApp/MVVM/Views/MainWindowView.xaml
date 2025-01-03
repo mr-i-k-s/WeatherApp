@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:WeatherApp.MVVM.Views"
+    xmlns:v="clr-namespace:WeatherApp.MVVM.Views"
+    xmlns:vm="clr-namespace:WeatherApp.MVVM.ViewModels"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d"
     Title="OpenWeatherApp" 
@@ -15,19 +16,438 @@
     Width="800"
     Focusable="True"
     AllowsTransparency="True"
-    Background="AliceBlue">
-    
+    Background="Gray">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <Style TargetType="TextBlock" x:Key="TextBlockStyle_1">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </Window.Resources>
+
     <Grid>
 
-        <Button
+        <!--1 Top Dockpanel-->
+        <DockPanel
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Command="{Binding ExitCommand}">
+            Margin="5"
+            Panel.ZIndex ="10">
+
+            <!--Close Button-->
+            <Button
+                DockPanel.Dock="Right"
+                VerticalAlignment="Top"
+                Command="{Binding ExitCommand}"
+                Background="Transparent"
+                BorderBrush="Transparent">
+
+                <Image
+                    MaxHeight="20"
+                    Margin="5,0"
+                    Source="pack://application:,,,/Assets/Icons/closeWindow.png"/>
+            </Button>
+
+            <!--Settings Button-->
+            <Button
+                DockPanel.Dock="Right"
+                VerticalAlignment="Top"
+                Command="{Binding }"
+                Background="Transparent"
+                BorderBrush="Transparent">
+
+                <Image
+                    MaxHeight="20"
+                    Margin="5,0"
+                    Source="pack://application:,,,/Assets/Icons/settingsGear.png"/>
+            </Button>
             
-            <Image
-            MaxHeight="40"
-            Source="pack://application:,,,/Assets/Icons/closeWindow.png"/>
-        </Button>
+            <DockPanel
+                DockPanel.Dock="Right">
+    
+                <!--Search field-->
+                <TextBox
+                    Name="SearchBox"
+                    DockPanel.Dock="Top">
+
+                    <TextBox.Template>
+                        <ControlTemplate TargetType="TextBox">
+                            <Grid>
+                                <TextBox 
+                                    Width="200"
+                                    Height="23"
+                                    Text="{Binding TextSearch,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    Padding="10,3,5,3"
+                                    FontSize="14"
+                                    Background="White"
+                                    CharacterCasing="Upper"
+                                    VerticalContentAlignment="Center">
+
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="15"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                                <TextBlock HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Text="Enter pleace"
+                                            Margin="5,0,5,0"
+                                            Foreground="#FF808080"
+                                            FontStyle="Italic"
+                                            IsHitTestVisible="False"
+                                            x:Name="UserMessage"
+                                            Visibility="Hidden"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="Text" Value=""/>
+                                        <Condition Property="IsKeyboardFocusWithin" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Visibility" TargetName="UserMessage" Value="Visible"/>
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </TextBox.Template>
+
+                </TextBox>
+
+                <ListBox
+                    x:Name="SearchList"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                    DockPanel.Dock="Top"
+                    Margin="0,1,0,0"
+                    Padding="10,3,5,3"
+                    ItemsSource="{Binding GeoDataList}"
+                    Visibility="{Binding IsVisible_GeoDataList, Converter={StaticResource BoolToVis}}"
+                    d:Visibility="Collapsed"
+                    MinWidth="200"
+                    MaxWidth="300"
+                    MaxHeight="80"
+                    FontSize="14"
+                    Background="White">
+
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </ListBox.Resources>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock >
+                                <Run Text="{Binding Name}"/>
+                                <Run Text=","/>
+                                <Run Text="{Binding Country}"/>
+                                <Run Text=","/>
+                                <Run Text="{Binding State}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding CitySelectedCommand}"
+                                                    CommandParameter="{Binding SelectedItem, ElementName=SearchList}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                </ListBox>
+
+            </DockPanel>
+
+        </DockPanel>
+
+        <!--2 Top Dockpanel-->
+        <DockPanel
+            Margin="10,20,10,10">
+
+            <!--Weather Place-->
+            <TextBlock
+                DockPanel.Dock="Top"
+                Foreground="Black"
+                FontSize="30"
+                FontWeight="DemiBold">
+    
+                <Run Text="{Binding SelectedLocation.Name}"/>
+                <d:Run Text="London"/>
+                <Run Text=","/>
+                <Run Text="{Binding SelectedLocation.Country}"/>
+                <d:Run Text="GB"/>
+            </TextBlock>
+
+            <!--Weather Info-->
+            <DockPanel
+                DockPanel.Dock="Top"
+                LastChildFill="False"
+                Margin="0,10,0,0"
+                HorizontalAlignment="Left">
+
+                <Grid
+                    DockPanel.Dock="Top"
+                    Visibility="{Binding IsVisible_WeatherData,Converter={StaticResource BoolToVis}}">
+
+                    <Border
+                        Height="50"
+                        CornerRadius="25"
+                        Background="White"
+                        BorderBrush="White"
+                        BorderThickness="1"
+                        Opacity="0.4"/>
+
+                    <DockPanel
+                        LastChildFill="False"
+                        Margin="10,0,20,0">
+
+                        <DockPanel
+                            DockPanel.Dock="Left"
+                            ToolTip="Humidity">
+
+                            <Image
+                                DockPanel.Dock="Left"
+                                Margin="0,0,5,0"
+                                Source="{Binding WeatherIconUri}"
+                                d:Source="pack://application:,,,/Assets/Icons/rainDay.png"
+                                Height="40"/>
+
+                            <TextBlock
+                                DockPanel.Dock="Left"
+                                Margin="0,0,5,0"
+                                Style="{StaticResource ResourceKey=TextBlockStyle_1}"
+                                TextAlignment="Center"
+                                VerticalAlignment="Center">
+                    
+                                <Run Text="{Binding WeatherType}"/>
+                                <d:Run Text="Rain"/>
+                            </TextBlock>
+
+                            <Border
+                                VerticalAlignment="Stretch"
+                                Margin="0,3,5,3"
+                                Width="3"
+                                BorderBrush="White"
+                                Background="White"/>
+                        </DockPanel>
+
+                        <DockPanel
+                            DockPanel.Dock="Left"
+                            ToolTip="Humidity">
+
+                            <Image
+                                DockPanel.Dock="Left"
+                                Margin="0,0,5,0"
+                                Source="pack://application:,,,/Assets/Icons/HumiditySymbol.png"
+                                Height="25"/>
+
+                            <TextBlock
+                                DockPanel.Dock="Left"
+                                Margin="0,0,5,0"
+                                Style="{StaticResource ResourceKey=TextBlockStyle_1}"
+                                TextAlignment="Center"
+                                VerticalAlignment="Center">
+                    
+                                <Run Text="{Binding WeatherData.Main.Humidity}"/>
+                                <d:Run Text="20"/>
+                                <Run Text="%"/>
+                            </TextBlock>
+
+                            <Border
+                                VerticalAlignment="Stretch"
+                                Margin="0,3,5,3"
+                                Width="3"
+                                BorderBrush="White"
+                                Background="White"/>
+                        </DockPanel>
+
+                        <DockPanel
+                            DockPanel.Dock="Left"
+                            ToolTip="Wind speed">
+
+                            <Image
+                                DockPanel.Dock="Left"
+                                Margin="0,0,5,0"
+                                Source="pack://application:,,,/Assets/Icons/WindSymbol.png"
+                                Height="30"/>
+
+                            <TextBlock
+                                DockPanel.Dock="Left"
+                                Margin="0,0,5,0"
+                                Style="{StaticResource ResourceKey=TextBlockStyle_1}"
+                                TextAlignment="Center"
+                                VerticalAlignment="Center">
+                    
+                                <Run Text="{Binding WeatherData.Wind.Speed, StringFormat={}{0:#}}"/>
+                                <d:Run Text="20"/>
+                                <Run Text="{Binding WindSpeedUnit}"/>
+                                <d:Run Text="m/s"/>
+                            </TextBlock>
+
+                            <Border
+                                VerticalAlignment="Stretch"
+                                Margin="0,3,5,3"
+                                Width="3"
+                                BorderBrush="White"
+                                Background="White"/>
+                        </DockPanel>
+
+                        <DockPanel
+                            DockPanel.Dock="Left"
+                            ToolTip="Wind direction">
+
+                            <Image
+                                DockPanel.Dock="Left"
+                                Margin="0,0,5,0"
+                                Source="pack://application:,,,/Assets/Icons/Kompas.png"
+                                Height="25"/>
+
+                            <TextBlock
+                                DockPanel.Dock="Left"
+                                Margin="0,0,5,0"
+                                Style="{StaticResource ResourceKey=TextBlockStyle_1}"
+                                TextAlignment="Center"
+                                VerticalAlignment="Center">
+                    
+                                <Run Text="{Binding WindDirection}"/>
+                                <d:Run Text="Nord-West"/>
+                            </TextBlock>
+
+                            <Border
+                                VerticalAlignment="Stretch"
+                                Margin="0,3,5,3"
+                                Width="3"
+                                BorderBrush="White"
+                                Background="White"/>
+                        </DockPanel>
+
+                        <DockPanel
+                            DockPanel.Dock="Left"
+                            ToolTip="Sunrise">
+
+                            <Image
+                                DockPanel.Dock="Left"
+                                Margin="0,0,5,0"
+                                Source="pack://application:,,,/Assets/Icons/Sunrise.png"
+                                Height="30"/>
+
+                            <TextBlock
+                                DockPanel.Dock="Left"
+                                Margin="0,0,5,0"
+                                Style="{StaticResource ResourceKey=TextBlockStyle_1}"
+                                TextAlignment="Center"
+                                VerticalAlignment="Center">
+                    
+                                <Run Text="{Binding SunriseTime}"/>
+                                <d:Run Text="07:00"/>
+                            </TextBlock>
+
+                            <Border
+                                VerticalAlignment="Stretch"
+                                Margin="0,3,5,3"
+                                Width="3"
+                                BorderBrush="White"
+                                Background="White"/>
+                        </DockPanel>
+
+                        <DockPanel
+                            DockPanel.Dock="Left"
+                            ToolTip="Sunset">
+
+                            <Image
+                                DockPanel.Dock="Left"
+                                Margin="0,0,5,0"
+                                Source="pack://application:,,,/Assets/Icons/Sunset.png"
+                                Height="30"/>
+
+                            <TextBlock
+                                DockPanel.Dock="Left"
+                                Margin="0,0,5,0"
+                                Style="{StaticResource ResourceKey=TextBlockStyle_1}"
+                                TextAlignment="Center"
+                                VerticalAlignment="Center">
+                    
+                                <Run Text="{Binding SunsetTime}"/>
+                                <d:Run Text="19:00"/>
+                            </TextBlock>
+
+                        </DockPanel>
+
+                    </DockPanel>
+
+                </Grid>
+
+                <DockPanel
+                    DockPanel.Dock="Top"
+                    LastChildFill="False"
+                    Visibility="{Binding IsVisible_WeatherData,Converter={StaticResource BoolToVis}}">
+
+                    <TextBlock
+                        Text="{Binding WeatherData.Main.Temp, StringFormat={}{0:#}}"
+                        d:Text="20"
+                        FontSize="150"/>
+
+                    <TextBlock
+                        Text="{Binding TempUnit}"
+                        d:Text="°C"
+                        FontSize="150"
+                        Visibility="Visible"/>
+
+                </DockPanel>
+
+            </DockPanel>
+            
+            <DockPanel
+                VerticalAlignment="Bottom">
+
+                <TextBlock
+                    DockPanel.Dock="Right"
+                    ToolTip="Link to OpenWeather.org"> 
+        
+                    <Hyperlink 
+                        Foreground="Black"
+                        TextDecorations="None"
+                        Command="{Binding OpenHyperLinkCommand}"
+                        CommandParameter="https://openweathermap.org">
+            
+                        <DockPanel
+                            LastChildFill="False">
+
+                            <Image
+                                DockPanel.Dock="Right"
+                                Height="25"
+                                Source="pack://application:,,,/Assets/Icons/OpenWeather.png"/>
+
+                            <TextBlock
+                                DockPanel.Dock="Right"
+                                Opacity="0.5"
+                                Text="Powered by "
+                                FontSize="10"/>
+
+                        </DockPanel>
+            
+                    </Hyperlink>
+        
+                </TextBlock>
+
+                <Image
+                    DockPanel.Dock="Left"
+                    MaxHeight="20"
+                    Source="{Binding ConnectionImageUri}"
+                    ToolTip="Connection status"/>
+
+                <TextBlock
+                    DockPanel.Dock="Left"
+                    VerticalAlignment="Bottom"
+                    Text="No Connection"
+                    FontWeight="DemiBold"
+                    Foreground="Red"
+                    Visibility="{Binding IsVisible_ConnectionError, Converter={StaticResource BoolToVis}}"/>
+
+            </DockPanel>
+
+        </DockPanel>
 
     </Grid>
     
