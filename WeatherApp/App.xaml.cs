@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using WeatherApp.Interfaces;
+using WeatherApp.MVVM.ViewModels;
 using WeatherApp.Services;
 
 namespace WeatherApp
@@ -37,6 +38,8 @@ namespace WeatherApp
 			services.AddSingleton<IGeoService, GeoService>();
 
 			// Register ViewModels
+			services.AddTransient<MainWindowViewModel>();
+			services.AddTransient<SettingsViewModel>();
 
 			// Register Views
 
