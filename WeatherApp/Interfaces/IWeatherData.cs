@@ -1,4 +1,6 @@
-﻿namespace WeatherApp.Interfaces
+﻿using WeatherApp.MVVM.Models
+
+namespace WeatherApp.Interfaces
 {
 	public interface IWeatherData
 	{
