@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Windows.Threading;
@@ -241,31 +242,55 @@ namespace WeatherApp.MVVM.ViewModels
 			switch (imageKey)
 			{
 				case "Clear":
-                    BackgroundImageUri = new Uri("pack://application:,,,/Assets/Images/Background/clear sky.jpg");
-                    break;
-                case "Clouds":
-                    BackgroundImageUri = new Uri("pack://application:,,,/Assets/Images/Background/broken clouds.jpg");
-                    break;
-                case "Rain":
-                    BackgroundImageUri = new Uri("pack://application:,,,/Assets/Images/Background/shower rain.jpg");
-                    break;
-                case "Drizzle":
-                    BackgroundImageUri = new Uri("pack://application:,,,/Assets/Images/Background/rain.jpg");
-                    break;
-                case "Thunderstorm":
-                    BackgroundImageUri = new Uri("pack://application:,,,/Assets/Images/Background/thunderstorm.jpg");
-                    break;
-                case "Snow":
-                    BackgroundImageUri = new Uri("pack://application:,,,/Assets/Images/Background/snow.jpg");
-                    break;
-                case "Mist":
-                    BackgroundImageUri = new Uri("pack://application:,,,/Assets/Images/Background/mist.jpg");
-                    break;
-                default:
-                    BackgroundImageUri = new Uri("pack://application:,,,/Assets/Images/Background/neutral.jpg");
-                    break;
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/clear sky.jpg");
+					break;
+				case "Thunderstorm":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/thunderstorm.jpg");
+					break;
+				case "Drizzle":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/rain.jpg");
+					break;
+				case "Rain":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/showerRain.jpg");
+					break;
+				case "Snow":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/snow.jpg");
+					break;
+				case "Mist":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/mist.jpg");
+					break;
+				case "Smoke":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/smoke.jpg");
+					break;
+				case "Haze":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/haze.jpg");
+					break;
+				case "Dust":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/dust.jpg");
+					break;
+				case "Fog":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/foggy.jpg");
+					break;
+				case "Sand":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/sandstorm.jpg");
+					break;
+				case "Ash":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/smoke.jpg");
+					break;
+				case "Squall":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/squall.jpg");
+					break;
+				case "Tornado":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/clear sky.jpg");
+					break;
+				case "Clouds":
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/fewClouds.jpg");
+					break;
+				default:
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/default.jpg");
+					break;
 
-            }    
+			}    
         }
 
 		#endregion Methodes 

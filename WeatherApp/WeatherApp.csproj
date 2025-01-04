@@ -12,13 +12,19 @@
     <None Remove="Assets\Backgrounds\brokenClouds.jpg" />
     <None Remove="Assets\Backgrounds\clearSky.jpg" />
     <None Remove="Assets\Backgrounds\DataError.jpg" />
+    <None Remove="Assets\Backgrounds\default.jpg" />
+    <None Remove="Assets\Backgrounds\dust.jpg" />
     <None Remove="Assets\Backgrounds\fewClouds.jpg" />
     <None Remove="Assets\Backgrounds\foggy.jpg" />
+    <None Remove="Assets\Backgrounds\haze.jpg" />
     <None Remove="Assets\Backgrounds\mist.jpg" />
     <None Remove="Assets\Backgrounds\rain.jpg" />
+    <None Remove="Assets\Backgrounds\sandstorm.jpg" />
     <None Remove="Assets\Backgrounds\scatteredClouds.jpg" />
     <None Remove="Assets\Backgrounds\showerRain.jpg" />
+    <None Remove="Assets\Backgrounds\smoke.jpg" />
     <None Remove="Assets\Backgrounds\snow.jpg" />
+    <None Remove="Assets\Backgrounds\squall.jpg" />
     <None Remove="Assets\Backgrounds\thunderstorm.jpg" />
     <None Remove="Assets\Icons\brokenClouds.png" />
     <None Remove="Assets\Icons\clearSkyDay.png" />
@@ -61,10 +67,19 @@
     <Resource Include="Assets\Backgrounds\DataError.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Backgrounds\default.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Backgrounds\dust.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Backgrounds\fewClouds.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Backgrounds\foggy.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Backgrounds\haze.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Backgrounds\mist.jpg">
@@ -73,13 +88,22 @@
     <Resource Include="Assets\Backgrounds\rain.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Backgrounds\sandstorm.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Backgrounds\scatteredClouds.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Backgrounds\showerRain.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Backgrounds\smoke.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Backgrounds\snow.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Backgrounds\squall.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Backgrounds\thunderstorm.jpg">

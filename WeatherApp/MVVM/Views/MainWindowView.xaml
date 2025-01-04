@@ -26,6 +26,10 @@
 
     <Grid>
 
+        <Image
+            Stretch="UniformToFill"
+            Source="{Binding BackgroundImageUri}"/>
+
         <!--1 Top Dockpanel-->
         <DockPanel
             HorizontalAlignment="Right"
