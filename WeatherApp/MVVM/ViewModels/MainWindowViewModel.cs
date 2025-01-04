@@ -242,7 +242,7 @@ namespace WeatherApp.MVVM.ViewModels
 			switch (imageKey)
 			{
 				case "Clear":
-					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/clear sky.jpg");
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/clearSky.jpg");
 					break;
 				case "Thunderstorm":
 					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/thunderstorm.jpg");
@@ -281,7 +281,7 @@ namespace WeatherApp.MVVM.ViewModels
 					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/squall.jpg");
 					break;
 				case "Tornado":
-					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/clear sky.jpg");
+					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/tornado.jpg");
 					break;
 				case "Clouds":
 					BackgroundImageUri = new Uri("pack://application:,,,/Assets/Backgrounds/fewClouds.jpg");

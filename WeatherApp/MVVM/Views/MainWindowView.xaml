@@ -28,6 +28,7 @@
 
         <Image
             Stretch="UniformToFill"
+            Opacity="0.7"
             Source="{Binding BackgroundImageUri}"/>
 
         <!--1 Top Dockpanel-->
